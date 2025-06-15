@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import type { Book } from "@prisma/client";
 import { CreateBookDto } from "./dto/create-book.dto";
 import { UpdateBookDto } from "./dto/update-book.dto";
+import { RecommendBookDto } from "./dto/recommend-book.dto";
 
 @Injectable()
 export class BooksService implements OnModuleInit, OnModuleDestroy {
@@ -46,6 +47,16 @@ export class BooksService implements OnModuleInit, OnModuleDestroy {
   async remove(id: number): Promise<Book> {
     return await this.prisma.book.delete({
       where: { id },
+    });
+  }
+
+  async recommend(dto: RecommendBookDto): Promise<Book | null> {
+    return await this.prisma.book.findFirst({
+      where: {
+        genre: dto.genre,
+        type: dto.type,
+        purpose: dto.purpose,
+      },
     });
   }
 }

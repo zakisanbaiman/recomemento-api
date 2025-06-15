@@ -12,6 +12,7 @@ import { BooksService } from "./books.service";
 import { CreateBookDto } from "./dto/create-book.dto";
 import { UpdateBookDto } from "./dto/update-book.dto";
 import type { Book } from "@prisma/client";
+import { RecommendBookDto } from "./dto/recommend-book.dto";
 
 @ApiTags("books")
 @Controller("books")
@@ -70,5 +71,10 @@ export class BooksController {
   @ApiResponse({ status: 404, description: "Book not found." })
   async remove(@Param("id") id: string): Promise<Book> {
     return await this.booksService.remove(+id);
+  }
+
+  @Post("recommend")
+  async recommend(@Body() dto: RecommendBookDto) {
+    return this.booksService.recommend(dto);
   }
 }

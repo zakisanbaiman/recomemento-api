@@ -20,12 +20,6 @@ export class CreateBookDto {
   genre: string;
 
   @ApiProperty({
-    description: "The type of the book",
-    example: "Novel",
-  })
-  type: string;
-
-  @ApiProperty({
     description: "The purpose of the book",
     example: "Entertainment",
   })

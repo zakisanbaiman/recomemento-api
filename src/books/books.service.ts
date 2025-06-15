@@ -54,7 +54,6 @@ export class BooksService implements OnModuleInit, OnModuleDestroy {
     return await this.prisma.book.findFirst({
       where: {
         genre: dto.genre,
-        type: dto.type,
         purpose: dto.purpose,
       },
     });
